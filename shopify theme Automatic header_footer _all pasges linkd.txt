@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-site-verification" content="6pIF060axIRJWkfkdGn2QD4_NKJ-YmBXLu5HVC-MEz4" />
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	
+	{% if template == 'index' %}
+    <title>{{ shop.name }} | {{ page_title }}</title>
+    {% elsif template == '404' %}
+    <title>Page Not Found | {{ shop.name }}</title>
+    {% else %}
+    <title>{{ page_title }} | {{ shop.name }}</title>
+    {% endif %}
+    {% if page_description %}
+    <meta name="description" content="{{ page_description }}" />
+    {% endif %}
+	
+	<meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="{{ canonical_url }}" />
+    {{ content_for_header }}
+
+	{{ 'gridder.css' | asset_url | stylesheet_tag }}
+	{{ 'normalize.css' | asset_url | stylesheet_tag }}
+	{{ 'style.css' | asset_url | stylesheet_tag }}
+	{{ 'screen.css' | asset_url | stylesheet_tag }}
+	{{ 'shopify.css' | asset_url | stylesheet_tag }}
+  	{{ 'journalstyle.css' | asset_url | stylesheet_tag }}
+  	{{ 'pignose.gallery.css' | asset_url | stylesheet_tag }}
+	
+  
+  
+
+	{{ '//fonts.googleapis.com/css?family=Varela+Round' | stylesheet_tag }}
+	{{ '//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' | stylesheet_tag }}
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WDLH3CL');</script>
+
+</head>
+	
+
+<body id="{{ page_title | handle }}" class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WDLH3CL"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>	
+  
+	<div class="container {{body_class}}">
+		{% section 'header' %}
+		{{ content_for_layout }}
+		{% section 'footer' %}
+	</div>
+
+	<script
+  src="//code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+	{{ 'script.js'  | asset_url | script_tag }}
+  	{{ 'journalscript.js'  | asset_url | script_tag }}
+	
+  <script data-no-instant>
+
+      function inIframe() {
+        try {
+          return window.self !== window.top;
+        } catch (e) {
+          return true;
+        }
+      }
+
+      if (!inIframe()){
+        InstantClick.on('change', function() {
+
+          $('head script[src*="shopify"]').each(function() {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = $(this).attr('src');
+
+            $('body').append( script );
+          });
+
+          $('html').removeClass('remodal-is-locked');
+
+        });
+        InstantClick.init();
+      }
+      </script>
+  	
+  
+  <script>
+      {{ settings.custom_scripts }}
+
+		$( document ).ready(function() {
+    		var str = $('#difftitle').text();         
+			var rest = str.substring(0, str.lastIndexOf(" ") + 1);
+			var last = str.substring(str.lastIndexOf(" ") + 1, str.length);
+
+          $('#difftitle').text(rest);
+          $('<span style="font-family: Tungsten-Light; font-weight:500;">'+last+'</span>').appendTo('#difftitle');
+         
+            
+		});
+    </script>
+  
+  {% include 'sumo' %}
+<!-- Warning: Do not remove. This is used for CartHook Checkout Replacement -->
+{% capture the_snippet_content %}{% include 'carthook-checkout' %}{% endcapture %} {% unless the_snippet_content contains "Liquid error" %} {% include 'carthook-checkout' %} {% endunless %}
+<!-- Warning: Do not remove. This is used for CartHook Checkout Replacement -->
+</body>
+
+</html>

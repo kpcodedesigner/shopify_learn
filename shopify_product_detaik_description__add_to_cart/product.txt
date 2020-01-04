@@ -1,0 +1,66 @@
+<div class="slide-container bundle_main">
+    <h1 class="complementary_header">
+
+        {% if section.settings.imagehead  %}
+        <img src="{{ section.settings.imagehead | img_url: '100x' }}" />
+        {% else %}
+
+        {% endif %}
+
+        {{ section.settings.main_heading }}
+
+    </h1>
+
+    <div class="bundle_description layout_compliment">
+
+        <h3>	{{section.settings.main_heading1}} </h3>
+
+        {{section.settings.main_description}}
+    </div>
+
+
+    <div class="bundle_imagearea">
+
+        {% assign collection = collections.complementary-habits-bundle %}
+        {% for product in collection.products %}
+
+        <form action="/cart/add" method="post" data-productid="{{product.id}}" enctype="multipart/form-data" id="AddToCartForm">
+
+            <div class="bundle_imagewithtext grid6-colom_33">
+                <div class="pos_align_{{ block.settings.text_align }}">
+                    <div class="complementary_title" style="visibility: visible; animation-name: fadeInRight;">
+                        <h3>
+                            {{ product.title }}
+                        </h3>
+                    </div>
+
+                    <div class="complementary_save">
+                        <p>
+                            Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price | ceil}}% {{ product.compare_at_price | money }} {{ product.price | money }}
+                        </p>
+                    </div>
+
+
+                    <img src="{{ product | img_url:'664x' }}" class="wow bounceIn" style="visibility: visible; animation-name: bounceIn;" />
+
+                    <div class="inner_page_desc" id="inner_page_image_bottom_text">{{  product.description }}</div>
+
+
+                    <input type="hidden" name="id" data-productid="{{product.id}}" class="product-select" value="{{ product.variants[0].id }}" data-variant-title="{{ product.variants[0].title }}" />
+                    <input type="submit" name="add" value="Add to Cart" class="action_button continue-button" id="coomplemenary_add_btn">
+
+                </div>
+
+
+            </div>
+
+        </form>
+
+        {% endfor %}
+
+    </div>
+
+
+
+
+</div>

@@ -1,0 +1,42 @@
+<ul class="dropdown-menu categories_menu mega_menu3" style="display: none;">
+  <li class="w-100 text-capitalize">
+    <div class="container">
+      <ul class="row">     
+        {% if menus[child_list_handle].levels != '' %}   
+        {% for childlink in menus[child_list_handle].links %}
+
+
+        {% assign catimage = "" %}
+
+        {% if childlink.type == "collection_link" %}                
+        {% if collections[childlink.handle].image %}                
+        {% assign catimage = collections[childlink.handle].image | img_url : 'large' |  split:'?' | first %}
+        {% else %}                
+        {% assign col = collections[childlink.handle] %}
+        {{ col }}
+        {% assign catimage = col.products.first | img_url : 'large' |  split:'?' | first %}
+        {% endif %}
+        {% endif %}
+        {% if childlink.type == "product_link" %}
+        {% assign col = all_products[childlink.handle] %}
+        {% assign catimage = col.featured_image | img_url : 'large' |  split:'?' | first %}
+        {% endif %}
+        {% if childlink.type == "blog_link" %}
+        {% assign articles = blogs[childlink.handle].articles %}
+        {% for article in articles limit:1 %}                
+        {% assign catimage = article.image.src | img_url : 'large' |  split:'?' | first %}
+        {% endfor %}                                
+        {% endif %}
+
+        <li class="col-lg-3 text-center">
+          <a href="{{ childlink.url }}">
+            <img src="{% if catimage != blank  %}{{ catimage  }} {% else %} {% if bgimage1[bgcheck] != blank  %}{{ bgimage1[bgcheck]  }}{% endif %} {% endif %}" class="img-fluid" alt="Memu_img">
+          </a>
+          <a href="{{ childlink.url }}" class="w-100">{{ childlink.title }}</a>
+        </li>
+        {% endfor %}
+        {% endif %}
+      </ul>
+    </div>
+  </li>
+</ul>

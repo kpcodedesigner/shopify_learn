@@ -1,0 +1,32 @@
+ {% if block.settings.enable_image %}
+        
+         {% if block.settings.image != blank %}
+            <p class="lunched_img">
+              <img  src="{{ block.settings.image.src | img_url: '500x' }}"
+                    class="lazyload_luched_head {{ settings.image_loading_style }}"
+                    alt="{{ block.settings.image.alt }}"
+                    data-sizes="auto"
+                    data-src="{{ block.settings.image | img_url }}"
+                    data-srcset=" {{ block.settings.image | img_url: '2048x' }} 2048w,
+                                  {{ block.settings.image | img_url: '1200x' }} 1200w,
+                                  {{ block.settings.image | img_url: '1000x' }} 1000w,
+                                  {{ block.settings.image | img_url: '800x' }} 800w,
+                                  {{ block.settings.image | img_url: '600x' }} 600w,
+                                  {{ block.settings.image | img_url: '400x' }} 400w"
+                     />
+             </p>
+            <noscript>
+              <p>
+                {{ block.settings.image | img_url: '480x480', scale: 2 | img_tag: block.settings.image.alt }}
+              </p>
+            </noscript>
+          {% else %}
+            <p>
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </p>
+          {% endif %}
+        {% endif %}
+        <div class="bg_text">
+        {% if block.settings.text != blank %}
+          <div class="lunching_text_p">{{ block.settings.text }}</div>
+        {% endif %}

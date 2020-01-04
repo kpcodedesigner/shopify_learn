@@ -1,0 +1,273 @@
+ <header>
+<!-- Start Header Logo-->
+<div class="header_logo col_4 visible-lg d-none">
+  <a href="/" itemprop="url" href="index.html">
+    {% if section.settings.logo != blank %}
+    {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+    <img src="{{ section.settings.logo | img_url: image_size |  split:'?' | first }}"
+         srcset="{{ section.settings.logo | img_url: image_size |  split:'?' | first }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 |  split:'?' | first }} 2x"
+         alt="{{ section.settings.logo.alt | default: shop.name }}"
+         itemprop="logo">
+    {% else %}
+    {{ shop.name }}
+    {% endif %}
+  </a>
+</div>
+<!-- End Header Logo-->
+<!-- Start Header Navigation-->
+<div class="col_6 visible-lg d-none">
+  {% include 'main-menu'%}
+</div>
+<!-- End Header Navigation-->
+<!-- Start Header Social Menu -->
+<div class="col_3 visible-lg d-none">
+  <ul class="social_icons float-md-right">
+    <!-- Social links -->
+    {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+            <li class="logout_icon position-relative"> 
+              <a href="#"  class="user_logout">
+                <i class="ion-log-out"></i> 
+                {% include 'asset_svg' with 'icon-logout'%}                
+              </a> 
+              <ul class="user_account position-absolute">
+                <li class="d-block"><a href="/account" {% if settings.language_enable %}data-translate="layout.customer.account"{% endif %}>{{ 'layout.customer.account' | t }}</a></li>
+                <li class="d-block ml-0"><a href="/account/logout" {% if settings.language_enable %}data-translate="layout.customer.log_out"{% endif %}>{{ 'layout.customer.log_out' | t  }}</a></li>
+              </ul>
+            </li>
+            {% else %}
+            <li class="login_icon">          
+               <a href="/account" {% if settings.language_enable %}data-translate="layout.customer.account"{% endif %}><i class="flaticon-social"></i></a>
+            </li>
+            {% endif %}         
+          {% endif %}
+    
+    
+    {% if settings.wishlist_enable and settings.wishlist_page %}
+    {% assign page_tmp = pages[settings.wishlist_page] %}
+    <li class="wishlist_icon">
+      <a href="{{page_tmp.url}}"><i class="flaticon-heart" ></i><span {% if settings.language_enable %}data-translate="header.settings.wishlist"{% endif %}>{{'header.settings.wishlist' | t}}</span></a>
+    </li>
+    {% endif %}    
+    <li class="search_icon">
+      <a href="javascript:void(0);"><i class="flaticon-magnifying-glass"></i></a>
+      <div class="search_form">
+        <form id="search_mini_form" action="/search" method="get" role="search">
+          <input type="hidden" name="type" value="product">
+          <input type="search" name="q" id="Search" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" {% if settings.language_enable %}data-translate="general.search.placeholder"{% endif %} class="input-text">
+          <button type="button" class="vertical_middle"><i class="flaticon-magnifying-glass"></i></button>
+        </form>
+      </div>      
+    </li>
+    <li class="cart_icon">
+      <a href="/cart">
+        <i class="flaticon-shopping-bag"></i>
+        <span class="count text-white rounded-circle text-center">{{ cart.item_count }}</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- End Header Social Menu -->
+<!-- Start Header Currency-->
+<div class="header_currency col_4 text-right visible-lg d-none">
+  {% include 'header-currency' %}
+</div>
+<!-- End Header Currency-->
+<div class="header_mobile hidden-lg d-block">
+  <!-- Start Header Currency-->
+  <div class="header_currency text-right">
+  {% include 'header-currency' %}
+  </div>
+  <!-- End Header Currency-->
+  <!-- Start Header Social Menu -->
+  <div class="social_icons_content">
+    
+    <ul class="social_icons float-md-right">
+    <!-- Social links -->
+    {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+            <li class="logout_icon position-relative"> 
+              <a href="#"  class="user_logout">
+                <i class="ion-log-out"></i> 
+                {% include 'asset_svg' with 'icon-logout'%}                
+              </a> 
+              <ul class="user_account position-absolute">
+                <li class="d-block"><a href="/account" {% if settings.language_enable %}data-translate="layout.customer.account"{% endif %}>{{ 'layout.customer.account' | t }}</a></li>
+                <li class="d-block ml-0"><a href="/account/logout" {% if settings.language_enable %}data-translate="layout.customer.log_out"{% endif %}>{{ 'layout.customer.log_out' | t  }}</a></li>
+              </ul>
+            </li>
+            {% else %}
+            <li class="login_icon">          
+               <a href="/account" {% if settings.language_enable %}data-translate="layout.customer.account"{% endif %}><i class="flaticon-social"></i></a>
+            </li>
+            {% endif %}         
+          {% endif %}
+    
+    
+    {% if settings.wishlist_enable and settings.wishlist_page %}
+    {% assign page_tmp = pages[settings.wishlist_page] %}
+    <li class="wishlist_icon">
+      <a href="{{page_tmp.url}}"><i class="flaticon-heart" ></i><span {% if settings.language_enable %}data-translate="header.settings.wishlist"{% endif %}>{{'header.settings.wishlist' | t}}</span></a>
+    </li>
+    {% endif %}    
+    <li class="search_icon">
+      <a href="javascript:void(0);"><i class="flaticon-magnifying-glass"></i></a>
+      <div class="search_form">
+        <form id="search_mini_form" action="/search" method="get" role="search">
+          <input type="hidden" name="type" value="product">
+          <input type="search" name="q" id="Search" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" {% if settings.language_enable %}data-translate="general.search.placeholder"{% endif %} class="input-text">
+          <button type="button" class="vertical_middle"><i class="flaticon-magnifying-glass"></i></button>
+        </form>
+      </div>      
+    </li>
+    <li class="cart_icon">
+      <a href="/cart">
+        <i class="flaticon-shopping-bag"></i>
+        <span class="count text-white rounded-circle text-center">{{ cart.item_count }}</span>
+      </a>
+    </li>
+  </ul>
+    
+  </div>
+  <!-- End Header Social Menu -->
+  <!-- Start Header Logo-->
+  <div class="header_logo col_4">
+    <a href="/">      
+      {% if section.settings.logo != blank %}
+      {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+      <img src="{{ section.settings.logo | img_url: image_size |  split:'?' | first }}" alt="{{ section.settings.logo.alt | default: shop.name }}" itemprop="logo" class="img-fluid">
+      {% else %}
+      {{ shop.name }}
+      {% endif %}
+
+    </a>
+  </div>
+  <!-- End Header Logo-->
+  <!-- Start Header Navigation-->
+  {% include 'main-menu-mobile'%}
+  <!-- End Header Navigation-->
+</div>
+</header>
+<div class="menu_overlay"></div>
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_max_width",
+        "min": 50,
+        "max": 450,
+        "step": 10,
+        "unit": "px",
+        "label": "Custom logo width",
+        "default": 250
+      },
+      {
+        "type": "link_list",
+        "id": "main_linklist",
+        "label": "Menu",
+        "default": "main-menu"
+      }
+    ],
+	"blocks":[
+	{
+		"type":"Text", 
+		"name": "Header Menu Label ",
+		"settings": [     
+		{
+			"type": "header",
+			"content": "Mega Menu"
+		},       
+		{
+			"type": "select",
+			"id": "menu_item_label",
+			"label": "Choose Menu Label",			
+			"options": [
+            {
+              "value": "none",
+              "label": "none"
+            },
+            {
+              "value": "1",
+              "label": "Label 1"
+            },
+            {
+              "value": "2",
+              "label": "Label 2"
+            },
+            {
+              "value": "3",
+              "label": "Label 3"
+            },
+            {
+              "value": "4",
+              "label": "Label 4"
+            },
+            {
+              "value": "5",
+              "label": "Label 5"
+            },
+            {
+              "value": "6",
+              "label": "Label 6"
+            },
+            {
+              "value": "7",
+              "label": "Label 7"
+            },
+            {
+              "value": "8",
+              "label": "Label 8"
+            },
+            {
+              "value": "9",
+              "label": "Label 9"
+            },
+            {
+              "value": "10",
+              "label": "Label 10"
+            }
+    	]
+    },
+	{
+      "type": "select",
+      "id": "sub_menu_type",
+      "label": "Sub Menu Type",
+      "info": "Select Mega Menu Style",
+      "options": [
+      {
+        "value": "type1",
+        "label": "Menu With Background Image"
+      },
+      {
+        "value": "type2",
+        "label": "Categories Menu"
+      },
+      {
+        "value": "type3",
+        "label": "Menu with Side Image"
+      }
+      ]
+    },
+	{
+      "type": "text",
+      "id": "img_title",
+      "label": "Title"
+    },
+	{
+      "type": "image_picker",
+      "id": "bgimage",
+      "label": "Select Image"
+    }
+    ]
+    }
+    ]
+  }
+{% endschema %}
+

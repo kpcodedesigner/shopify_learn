@@ -1,0 +1,151 @@
+  	{%comment%}
+<div class="fearuer-row_one">
+  <h2 class="mainextitle_header">GLUTE ACTIVATION WARMUP</h2>
+    <div class="width-resp aligncenter">
+      <div class="grid6-12 first nomartop">
+        <div class="row sectiontitle wow fadeInRight" style="visibility: visible; animation-name: fadeInRight;">
+          <h3 class="exertitle">1a. Clam Opener</h3>
+        </div>
+        <ul class="desc exdesc">
+          <li>Wrap the resistance band just over your knees.</li>
+          <li>Lay on your leg side with your knees bent and your feet together.</li>
+          <li>Open your knees apart as widely as possible while squeezing the glute muscles in your right leg as tightly as possible.</li>
+          <li>Slowly allow the knee to come down so that they’re together again on the floor, and repeat the movement.</li>
+        </ul>
+      </div>
+      <div class="grid6-12 last pad-med">
+        <img src="{{ 'Clam_Opener.png' | asset_url}}" class="wow bounceIn" style="visibility: visible; animation-name: bounceIn;" alt="">
+      </div>
+  </div>
+</div>
+	{%endcomment%}  
+
+   
+ <div class="fearuer-row_one">
+  <h2 class="mainextitle_header">{{ section.settings.main_heading }}</h2>
+   <hr class="pink">
+    {% for block in section.blocks %}
+     <div class="width-resp aligncenter feature_box">
+      <div class="grid6-colom_50 pos_{{ block.settings.text_align }}">
+        <div class="row sectiontitle wow fadeInRight" style="visibility: visible; animation-name: fadeInRight;">
+          <h3 class="exertitle">{{ block.settings.title }}</h3>
+        </div>
+        <div class="p_text_heading">{{ block.settings.texthead }}</div>
+		<div class="desc exdesc">{{ block.settings.text }}</div>
+        <div class="note">{{ block.settings.textnote }}</div>
+        <div class="p_text_heading">{{ block.settings.textheadone }}</div>
+		<div class="desc exdesc">{{ block.settings.textone }}</div>
+       </div>
+      <div class="grid6-colom_50 pos_{{ block.settings.image_align }}">
+        {% if block.settings.image %}
+          <img  src="{{ block.settings.image | img_url: '664x' }}"
+               alt="{% if block.settings.image.alt != blank %}{{ block.settings.image.alt | escape }}{% else %}{{ block.settings.title | escape }}{% endif %}"
+              class="wow bounceIn"
+               style="visibility: visible; animation-name: bounceIn;" />   
+        {% else %}
+        {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+        {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
+        {% endif %}
+               
+    </div>
+   </div>
+   
+ {% endfor %}
+ 
+     
+
+</div>
+   
+{% schema %}
+{
+  "name": "GLUTE ACTIVATION WARMUP",
+  "class": "image-with-text-section", 
+  "settings": [
+    {     
+          "type": "text",
+          "id": "main_heading",
+          "label": "Main Heading Text",
+          "default": "Heading Text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image with text",
+      "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Your headline"
+        },
+		{
+          "type": "richtext",
+          "id": "texthead",
+          "label": "Text",
+          "default": "<p>Head text</p>"
+        },
+		{
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Promotion description appears here.</p>"
+        },
+		{
+          "type": "richtext",
+          "id": "textheadone",
+          "label": "Text",
+          "default": "<p>Head text</p>"
+        },
+		{
+          "type": "richtext",
+          "id": "textone",
+          "label": "Text",
+          "default": "<p>Promotion description appears here.</p>"
+        },
+		{
+          "type": "richtext",
+          "id": "textnote",
+          "label": "Text",
+          "default": "<p>Note: Try and keep your hips as high as possible while doing this move.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+		{
+      		"type": "select",
+      		"id": "text_align",
+      		"label": "Text alignment",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },             
+              {
+                "value": "right",
+                "label": "Right"
+              }
+      		]
+    	},
+		{
+      		"type": "select",
+      		"id": "image_align",
+      		"label": "Image alignment",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },             
+              {
+                "value": "right",
+                "label": "Right"
+              }
+      		]
+    	}
+      ]
+    }
+  ]
+}
+{% endschema %}

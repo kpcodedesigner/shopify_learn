@@ -1,0 +1,34 @@
+<div class="align-self-center">
+  <ul class="pagination text-center justify-content-center">
+    {% if paginate.previous %}
+    <li class="page-item">
+      <a class="page-link" href="{{ paginate.previous.url }}" title="{{ 'collections.general.previous' | t }}"  {% if settings.language_enable %}data-translate="collections.general.previous" translate-item="title"{% endif %}>
+        <i class="flaticon-arrows-1"></i>
+      </a>
+    </li>
+    {% else %}
+    {% endif %}
+
+    {% for part in paginate.parts %}
+    {% if part.is_link %}
+    <li class="page-item">
+      <a class="page-link" href="{{ part.url }}">{{ part.title }}</a>
+    </li>
+    {% else %}
+    {% if part.title == paginate.current_page %}
+    <li class="page-item active"><a class="page-link">{{ part.title }}</a></li>
+    {% else %}
+    <li class="page-item"><a class="page-link">{{ part.title }}</a></li>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    
+    {% if paginate.next %}
+    <li class="page-item">
+      <a class="page-link" href="{{ paginate.next.url }}" title="{{ 'collections.general.next' | t }}"  {% if settings.language_enable %}data-translate="collections.general.next" translate-item="title"{% endif %}>
+        <i class="flaticon-arrows"></i>
+      </a>
+    </li>  
+    {% endif %}
+  </ul>
+</div>

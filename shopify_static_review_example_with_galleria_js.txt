@@ -1,0 +1,47 @@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/galleria.min.js"></script>
+
+<div class="innerwrap clearfix lapvis">
+		<div class="slide-container">
+          <h1 class="reviewtitle">Reviews + Testimonials</h1>
+          <div class="galleria msjv2" id="galleria">
+            <img src="https://www.habitnest.com/assets/img/test1.png" style="height: 800px;">
+            <img src="//cdn.shopify.com/s/files/1/1585/6091/files/test2.png?v=1544161876" style="height: 800px;">
+            <img src="//cdn.shopify.com/s/files/1/1585/6091/files/test3.png?v=1544161920" style="height: 800px;">
+            <img src="//cdn.shopify.com/s/files/1/1585/6091/files/test4.png?v=1544161973" style="height: 800px;">
+            <img src="//cdn.shopify.com/s/files/1/1585/6091/files/test5.png?v=1544161788" style="height: 800px;">
+          </div>
+		</div>
+	</div>
+  
+        <script>
+	(function() { 
+            Galleria.loadTheme('https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/themes/classic/galleria.classic.min.js');
+            Galleria.run('.galleria');
+        }());
+        </script>
+
+
+<div class="innerwrap clearfix mobvis">
+		<div class="slide-container">
+          <h1 class="reviewtitle">Reviews + Testimonials</h1>
+          <div class="galleria msjv2 galleriamob" id="galleria">
+            <img src="{{ 're1.PNG' | asset_url}}" style="height: 800px;">
+            <img src="{{ 're2.PNG' | asset_url}}" style="height: 800px;">
+            <img src="{{ 're3.PNG' | asset_url}}" style="height: 800px;">
+            <img src="{{ 're4.PNG' | asset_url}}" style="height: 800px;">
+            <img src="{{ 're5.PNG' | asset_url}}" style="height: 800px;">
+            <img src="{{ 're6.PNG' | asset_url}}" style="height: 800px;">
+            <img src="{{ 're7.PNG' | asset_url}}" style="height: 800px;">
+            <img src="{{ 're8.PNG' | asset_url}}" style="height: 800px;">
+            <img src="{{ 're9.PNG' | asset_url}}" style="height: 800px;">
+          </div>
+		</div>
+	</div>
+        <script>
+	(function() { 
+            Galleria.loadTheme('https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/themes/classic/galleria.classic.min.js');
+            Galleria.run('.galleriamob');
+        }());
+        </script>
+  

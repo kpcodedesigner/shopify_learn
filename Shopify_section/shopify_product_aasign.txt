@@ -1,0 +1,210 @@
+<div class="slide-container bundle_main">
+    <h1 class="complementary_header">
+
+        {% if section.settings.imagehead  %}
+        <img src="{{ section.settings.imagehead | img_url: '100x' }}" />
+        {% else %}
+
+        {% endif %}
+
+        {{ section.settings.main_heading }}
+
+    </h1>
+
+    <div class="bundle_description layout_compliment">
+
+        <h3>{{section.settings.main_heading1}} </h3>
+
+        {{section.settings.main_description}}
+    </div>
+
+
+    <div class="bundle_imagearea">
+
+        {% assign collection = collections.partner-pack %}
+        {% for product in collection.products %}
+
+        <form action="/cart/add" method="post" data-productid="{{product.id}}" enctype="multipart/form-data" id="AddToCartForm">
+
+            <div class="bundle_imagewithtext grid6-colom_33">
+                <div class="pos_align_{{ block.settings.text_align }}">
+                    <div class="complementary_title" style="visibility: visible; animation-name: fadeInRight;">
+                        <h3>
+                            {{ product.title }}
+                        </h3>
+                    </div>
+
+                    <div class="complementary_save">
+                        <p>
+                            Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price | ceil}}% {{ product.compare_at_price | money }} {{ product.price | money }}
+                        </p>
+                    </div>
+
+                    <img src="{{ product | img_url:'664x' }}" class="wow bounceIn" style="visibility: visible; animation-name: bounceIn;" />
+
+                    {%comment%}
+
+                    <div class="bundle_title" id="inner_page_image_bottom_title" style="visibility: visible; animation-name: fadeInRight;">
+                        <h3>Includes:</h3>
+                    </div>
+
+                    {%endcomment%}
+
+                    <div class="inner_page_desc" id="inner_page_image_bottom_text">{{  product.description }}</div>
+
+
+                    <input type="hidden" name="id" data-productid="{{product.id}}" class="product-select" value="{{ product.variants[0].id }}" data-variant-title="{{ product.variants[0].title }}" />
+                    <input type="submit" name="add" value="Add to Cart" class="action_button continue-button" id="coomplemenary_add_btn">
+                </div>
+
+            </div>
+
+        </form>
+
+        {% endfor %}
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+<div style="clear:both;"></div>
+{% schema %}
+{
+  "name": "partner_pack",
+  "class": "bundle_inner_page_box",
+  "settings": [
+   {
+      "type": "image_picker",
+      "id": "imagehead",
+      "label": "image"
+    },
+    {
+          "type": "text",
+          "id": "main_heading",
+          "label": "Main Heading Text",
+          "default": "partner"
+    },
+	{
+          "type": "text",
+          "id": "main_heading1",
+          "label": "Main Heading Text",
+          "default": "partner"
+    },
+	{
+          "type": "richtext",
+          "id": "main_description",
+          "label": "Main Description Text",
+		  "default": "<p>partner Description</p>"
+    }
+
+
+
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image with text",
+      "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Your headline"
+        },
+		{
+          "type": "text",
+          "id": "titleimg",
+          "label": "Heading",
+          "default": "Your headline"
+        },
+
+		{
+          "type": "richtext",
+          "id": "textdiscount",
+          "label": "Text",
+          "default": "<p>save upto...</p>"
+        },
+		{
+          "type": "text",
+          "id": "title1",
+          "label": "Heading",
+          "default": "Your headline"
+        },
+
+		{
+          "type": "richtext",
+          "id": "text1",
+          "label": "Text",
+          "default": "<p>Text above image</p>"
+        },
+		{
+          "type": "image_picker",
+          "id": "image1",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+
+
+		{
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+		{
+      		"type": "select",
+      		"id": "text_align",
+      		"label": "Text alignment",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              },
+			  {
+				"value": "center",
+                "label": "Center"
+			  }
+      		]
+    	},
+		{
+      		"type": "select",
+      		"id": "image_align",
+      		"label": "Image alignment",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              },
+			  {
+				"value": "center",
+                "label": "Center"
+			  }
+      		]
+    	}
+      ]
+    }
+  ]
+}
+{% endschema %}

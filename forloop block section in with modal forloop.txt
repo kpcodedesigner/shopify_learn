@@ -1,0 +1,286 @@
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}
+
+      {% if section.blocks.size > 0 %}
+        <ul class="logo-bar{% if section.settings.title_enable %} logo-bar--large{% endif %}">
+          {% assign foo = 1 %}
+           <div class="row" id="align_row">
+             
+             {% for block in section.blocks %}
+              
+				
+				{% assign foo = foo | plus: 1 %}
+				
+             
+             
+			<div class="col-lg-6 col-md-6 col-sm-12 col-12 p-0">
+                <div class="img-page2{% if section.settings.title_enable %} logo-bar__item--large{% endif %}" {{ block.shopify_attributes }}>
+                  
+                  {% if block.settings.image != blank %}
+                    {{ block.settings.image | img_url: '600x600', scale: 1 | img_tag: block.settings.image.alt, 'clients__image' }}
+                  {% else %}
+                    {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+                  {% if block.settings.link != blank %}
+                  {% endif %}
+                
+                
+                  <div class="overlay">
+                    <div class="client_overlay_text">
+
+                      {% if block.settings.title != blank %}
+                        <h2 class="client_project_head"> {{ block.settings.title | escape }} </h2>
+                      {% endif %}
+                      
+                      
+                       {% if block.settings.text != blank %}
+                      <p>{{ block.settings.text | split: '<!-- split -->' }}</p>
+                        {% endif %}
+
+                      {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+                          <a href="{{ block.settings.button_link }}" data-toggle="modal" data-target="#project{{ foo }}" class="btn project_btn btn-rounded">
+                           {{ block.settings.button_label | escape }}
+                          </a>
+                      {% endif %}
+                      
+                    </div>
+                  </div>
+                  
+                  <div class="modal fade" id="project{{ foo }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content clients">
+
+                        <div class="modal-header">
+
+                          {% if block.settings.title != blank %}
+                        <h2 class="client_project_head_modal"> {{ block.settings.title | escape }} </h2>
+                      {% endif %}
+                      
+                      
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        
+                        <div class="modal-body">
+                          
+                           {% if block.settings.text != blank %}
+                      	 	<p>{{ block.settings.text | split: '<!-- split -->' }}</p>
+                           {% endif %}
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+             </div>
+
+            {% endfor %}
+          </div>
+        </ul>
+      {% endif %}
+     
+     
+     
+     {%comment%}
+     
+     
+     
+     
+       {%endcomment%}
+     
+   
+
+
+
+
+{% schema %}
+{
+  "name": {
+    "de": "clients",
+    "en": "clients"
+  },
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": {
+        "de": "Fotoausrichtung",
+        "en": "Image alignment",
+        "es": "Alineación de imagen",
+        "fr": "Alignement de l'image",
+        "it": "Allineamento immagine",
+        "ja": "?????????",
+        "pt-BR": "Alinhamento da imagem"
+      },
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": {
+            "de": "Links",
+            "en": "Left",
+            "es": "Izquierda",
+            "fr": "Gauche",
+            "it": "Sinistra",
+            "ja": "?",
+            "pt-BR": "Esquerda"
+          }
+        },
+        {
+          "value": "right",
+          "label": {
+            "de": "Rechts",
+            "en": "Right",
+            "es": "Derecha",
+            "fr": "Droite",
+            "it": "Destra",
+            "ja": "?",
+            "pt-BR": "Direita"
+          }
+        }
+      ]
+    }
+  ],
+ "blocks": [
+	{
+      "type": "logo_image",
+      "name": {
+        "de": "Logo",
+        "en": "Logo",
+        "es": "Logotipo",
+        "fr": "Logo",
+        "it": "Logo",
+        "ja": "??",
+        "pt-BR": "Logotipo"
+      },
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "de": "Foto",
+            "en": "Image",
+            "es": "Imagen",
+            "fr": "Image",
+            "it": "Immagine",
+            "ja": "??",
+            "pt-BR": "Imagem"
+          }
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": {
+            "de": "Link",
+            "en": "Link",
+            "es": "Enlace",
+            "fr": "Lien",
+            "it": "Link",
+            "ja": "???",
+            "pt-BR": "Link"
+          },
+          "info": {
+            "de": "Optional",
+            "en": "Optional",
+            "es": "Opcional",
+            "fr": "Facultatif",
+            "it": "Facoltativo",
+            "ja": "?????",
+            "pt-BR": "Opcional"
+          }
+        },
+	{
+      "type": "text",
+      "id": "title",
+      "label": {
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fr": "En-tête",
+        "it": "Heading",
+        "ja": "???",
+        "pt-BR": "Título"
+      },
+      "default": {
+        "de": "Logo-Liste",
+        "en": "Logo list",
+        "es": "Lista de logotipos",
+        "fr": "Liste de logos",
+        "it": "Elenco loghi",
+        "ja": "?????",
+        "pt-BR": "Lista de logotipos"
+      }
+     },
+	{
+      "type": "text",
+      "id": "text",
+      "label": {
+        "de": "text",
+        "en": "desc",
+        "es": "desc",
+        "fr": "desc",
+        "it": "desc",
+        "ja": "desc",
+        "pt-BR": "desc"
+      },
+      "default": {
+        "de": "Logo-Liste",
+        "en": "Logo list",
+        "es": "Lista de logotipos",
+        "fr": "Liste de logos",
+        "it": "Elenco loghi",
+        "ja": "?????",
+        "pt-BR": "Lista de logotipos"
+      }
+     },
+	{
+      "type": "text",
+      "id": "button_label",
+      "label": {
+        "de": "Button-Etikett",
+        "en": "Button label"
+      }
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": {
+        "de": "Button-Link",
+        "en": "Button link"
+      }
+    }
+  	
+	]
+  }
+
+ ],
+
+
+  "presets": [
+    {
+      "name": {
+        "de": "Foto mit Text",
+        "en": "Image with text",
+        "es": "Imagen con texto",
+        "fr": "Image avec texte",
+        "it": "Immagine con testo",
+        "ja": "????????",
+        "pt-BR": "Imagem com texto"
+      },
+      "category": {
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fr": "Image",
+        "it": "Immagine",
+        "ja": "??",
+        "pt-BR": "Imagem"
+      }
+    }
+  ]
+}
+{% endschema %}
+
+

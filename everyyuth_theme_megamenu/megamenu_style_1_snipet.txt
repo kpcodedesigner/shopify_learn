@@ -1,0 +1,24 @@
+<ul class="dropdown-menu megamenu_full_screen" style = "{% if bgimage1[bgcheck] != blank  %}background-image:url('{{ bgimage1[bgcheck]  }}');{% else %}background-color:#fff;{% endif %}">
+          <li class="w-100 text-capitalize">
+            <div class="container">
+              <div class="row">
+                <!-- Child Menu Loop -->
+                {% if menus[child_list_handle].levels != '' %}   
+                {% for childlink in menus[child_list_handle].links %}
+                <div class="col-lg-4">
+                  <ul>
+                    <li class="title_h5 w-100">{{ childlink.title }}</li>                          
+                    {%- assign subchildhandle = childlink.title | handleize -%}
+                    {% if menus[subchildhandle].levels != '' %}
+                    {% for subchild in menus[subchildhandle].links %}
+                    <li class="w-100"><a href="{{ subchild.url }}">{{ subchild.title }}</a></li>
+                    {% endfor %}
+                    {% endif %}
+                  </ul>
+                </div>
+                {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+          </li>
+        </ul>

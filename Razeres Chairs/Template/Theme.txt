@@ -1,0 +1,243 @@
+<!doctype html>
+<html class="no-touch no-js">
+  
+<head>
+  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  <!-- Basic page needs ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  {% if settings.favicon %}
+  <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
+  {% endif %}
+
+  <!-- Title and description ================================================== -->
+  <title>
+  {{ page_title }}{% if current_tags %}{% assign current_tags_joined = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags_joined }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <!-- Product meta ================================================== -->
+  {% include 'social-meta-tags' %}
+
+  <!-- Helpers ================================================== -->
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- CSS ================================================== -->
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'jquery.countdownTimer.css' | asset_url | stylesheet_tag }}
+  {{ 'slick.css' | asset_url | stylesheet_tag }}
+  {{'animate.css' | asset_url |stylesheet_tag }}
+  {{ 'style.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'responsive.scss.css' | asset_url | stylesheet_tag }}
+
+  <!-- Header hook for plugins ================================================== -->
+  {{ content_for_header }}
+
+  {% comment %}
+    If you store has customers disabled, you can remove the following JS file
+  {% endcomment %}
+  {% if template.directory == 'customers' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+  {% endif %}
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'lazysizes.min.js' | asset_url }}" async="async"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'lazysizes.min.js' | asset_url }}"></script><![endif]-->
+
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'vendor.js' | asset_url }}"></script><![endif]-->
+  
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'theme.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'theme.js' | asset_url }}"></script><![endif]-->
+  
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'jquery.countdownTimer.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'jquery.countdownTimer.js' | asset_url }}"></script><![endif]--> 
+  
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'slick.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'slick.min.js' | asset_url }}"></script><![endif]--> 
+    
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'instafeed.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'instafeed.min.js' | asset_url }}"></script><![endif]--> 
+ 
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'wow.min.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'wow.min.js' | asset_url }}"></script><![endif]--> 
+
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'custom.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'custom.js' | asset_url }}"></script><![endif]-->
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+	{{ shop.metafields.loox["global_html_head"] }}
+  
+</head>
+
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+
+  {% section 'header' %}
+
+  <main class=" main-content{% if template.name == blank %} main-content--no-template{% endif %}" role="main">
+
+    {{ content_for_layout }}
+
+  </main>
+
+  {% section 'footer' %}
+
+  <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+     <div id="modal-header">
+      </div>
+       <div id="modal-body">
+		<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+        <style type="text/css">
+            #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+        </style>
+          <div id="mc_embed_signup">
+          <form action="https://rezeros.us20.list-manage.com/subscribe/post?u=88570e3df1ccfce7d5102d401&amp;id=97fa61137b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+              <div id="mc_embed_signup_scroll">
+              <h2>ULTIMATE PRO TIPS TO MAKE A CAREER OUT OF VIDEO GAMES</h2>
+
+          <div class="mc-field-group">
+              <input type="text" value="" name="FNAME" class="news_first" id="mce-FNAME" placeholder="Name">
+          </div>
+          <div class="mc-field-group">
+              <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Enter your email address">
+          </div>
+
+              <div id="mce-responses" class="clear">
+                  <div class="response" id="mce-error-response" style="display:none"></div>
+                  <div class="response" id="mce-success-response" style="display:none"></div>
+              </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_88570e3df1ccfce7d5102d401_97fa61137b" tabindex="-1" value=""></div>
+              <div class="clear"><input type="submit" value="Download Now" name="Download Now" id="mc-embedded-subscribe" class="button"></div>
+              </div>
+          </form>
+          </div>
+      </div>
+    </div>
+   </div>
+  </div>
+  
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  
+  <script>
+
+  var moneyFormat = '{{ shop.money_format }}';
+  
+  var theme = {
+    strings:{
+      product:{
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        will_be_in_stock_after:{{ 'products.product.will_be_in_stock_after' | t: date: '[date]' | json }},
+        only_left:{{ 'products.product.only_left' | t: count: '1' | json }}
+      },
+      navigation:{
+        more_link: {{ 'layout.navigation.more' | t | json }}
+      },
+      map:{
+        addressError: {{ 'map.errors.address_error' | t | json }},
+        addressNoResults: {{ 'map.errors.address_no_results' | t | json }},
+        addressQueryLimit: {{ 'map.errors.address_query_limit_html' | t | json }},
+        authError: {{ 'map.errors.auth_error_html' | t | json }}
+      }
+    },
+    settings:{
+      cartType: {{ settings.ajax_cart_method | json }}
+    }
+  }
+      
+      var slideIndex = 1;
+      showSlides(slideIndex);
+
+      function plusSlides(n) {
+        showSlides(slideIndex += n);
+      }
+
+      function currentSlide(n) {
+        showSlides(slideIndex = n);
+      }
+
+      function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot_one");
+        if (n > slides.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "";  
+        dots[slideIndex-1].className += " active";
+      }
+
+</script>
+
+  {%comment%}
+  
+ 	 <script>
+    
+    
+    var showModalButton = document.getElementById('show-modal');
+var closeModalButton = document.getElementById('close-modal');
+var modalLightbox = document.getElementById('modal-lightbox');
+var modal = document.getElementById('modal');
+var modalHeader = document.getElementById('modal-header');
+var nextImageButton = document.getElementById('next-button');
+var prevImageButton = document.getElementById('prev-button');
+var images = [
+   'https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1953&q=80',
+   'https://images.unsplash.com/photo-1551376347-075b0121a65b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80',
+   'https://images.unsplash.com/photo-1543506299-953d344e01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80'
+];
+
+var currImage = 0;
+
+showModalButton.addEventListener('click', showModal);
+
+function showModal(e){
+   showModalAnimate();
+}
+window.onclick = function(event) {
+  if (event.target == modalLightbox) {
+      closeModalAnimate();
+  }
+}
+function showModalAnimate(){
+   modalLightbox.classList.remove('disappear');
+   modal.classList.remove('disappear');
+   modalLightbox.classList.add('appear');
+   modal.classList.add('appear');
+   modal.style.display = "block";
+   modalLightbox.style.display = "block";
+}
+    
+    
+    
+  </script>
+  
+  {%endcomment%}
+  
+  {% if settings.ajax_cart_method != 'page' %}
+
+  {% include 'ajax-cart-template' %}
+
+{% endif %}  
+  {% if settings.show_multiple_currencies %}{% include 'currencies' %} {% endif %}
+
+	{{ shop.metafields.loox["global_html_body"] }}
+</body>
+  
+</html>

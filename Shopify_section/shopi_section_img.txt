@@ -1,0 +1,26 @@
+{% if section.settings.imagehead  %}
+           <img  src="{{ section.settings.imagehead | img_url: '100x' }}"/> 
+        {% else %}
+
+      {% endif %}
+
+
+
+
+
+
+
+"name": "Weightlifting lunching",
+    "class": "text-columns-with-images-section",
+    "settings": [
+      
+	{
+      "type": "image_picker",
+      "id": "imagehead",
+      "label": "image signin"
+    },
+	{
+      "type": "image_picker",
+      "id": "image1",
+      "label": "image send"
+    },
